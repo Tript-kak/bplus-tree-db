@@ -13,7 +13,7 @@ class BinaryObject{
 
         virtual size_t size() const = 0;
 
-        const virtual vector<uint8_t> getBytes() const = 0;
+        const virtual vector<uint8_t>& getBytes() const = 0;
 
         virtual E getFirst() const{
             throw runtime_error("Operation not supported");

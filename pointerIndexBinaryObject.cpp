@@ -39,7 +39,7 @@ class PointerIndexBinaryObject : public IndexBinaryObject<Pointer>{
                 create(
                     const vector<uint8_t>& bytes,
                     size_t beginning
-                )  override{
+                )override{
                     vector<uint8_t> value(
                         bytes.begin() + beginning, 
                         bytes.begin() + beginning + BYTES
@@ -48,20 +48,45 @@ class PointerIndexBinaryObject : public IndexBinaryObject<Pointer>{
                     return make_unique<PointerIndexBinaryObject>(value);
                 }
 
-                
+                size_t size() const override{
+                    return BYTES;
+                }
+
+                unique_ptr<BinaryObject<Pointer>>
+                createEmpty() const override{
+                    return create(Pointer :: empty());
+                }
                 
         };
 };
 
 int main() {
 
-    Pointer p = Pointer::empty();
+    Pointer p(0x01, 123456, 42);
 
     PointerIndexBinaryObject::Factory factory;
 
     auto obj = factory.create(p);
 
     cout << "Size: " << obj->size() << endl;
+
+
+    const vector<uint8_t>& bytes = obj->getBytes();
+
+    cout << "Number of bytes: "  << bytes.size() << endl;
+
+    auto obj2 = factory.create(bytes, 0);
+
+    Pointer recovered = obj2->asObject();
+
+
+    cout << "Original:  " << p << endl;
+    cout << "Recovered: " << recovered << endl;
+
+    cout << "Same? "
+         << (p == recovered ? "YES" : "NO")
+         << endl;
+
 
     return 0;
 }
