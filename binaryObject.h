@@ -11,9 +11,9 @@ class BinaryObject{
 
         virtual E asObject() const = 0;
 
-        virtual int size() const = 0;
+        virtual size_t size() const = 0;
 
-        virtual vector<uint8_t> getBytes() const = 0;
+        const virtual vector<uint8_t> getBytes() const = 0;
 
         virtual E getFirst() const{
             throw runtime_error("Operation not supported");
