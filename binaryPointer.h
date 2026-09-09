@@ -92,7 +92,7 @@ class Pointer{
                         chunk = (chunk << 8) | bytes[position+9+i];
                     }
 
-                    return Pointer(type,position,chunk);
+                    return Pointer(type,pointerPosition,chunk);
             }
 
 
