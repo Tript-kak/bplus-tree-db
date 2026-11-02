@@ -2,7 +2,7 @@
 using namespace std;
 #pragma once
 
-template <typename K, typename v>
+template <typename K, typename V>
 
 struct KeyValue{
     K key;
